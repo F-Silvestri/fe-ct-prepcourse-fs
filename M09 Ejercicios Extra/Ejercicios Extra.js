@@ -9,11 +9,20 @@ function deObjetoAarray(objeto) {
    
   
 
-   return (Object.entries(objeto));
+  // return (Object.entries(objeto))
+////////////
+
+ var array = []
+ var keys = Object.keys(objeto);
+
+ for(var i = 0; i < keys.length; i++) {
+   array.push([keys[i], objeto[keys[i]]]) }
+
+
+ return array;
+
 
     
-
-
 
 }
 
@@ -23,19 +32,23 @@ function numberOfCharacters(string) {
    // Las letras deben estar en orden alfabético.
    // [EJEMPLO]: "adsjfdsfsfjsdjfhacabcsbajda" ---> { a: 5, b: 2, c: 2, d: 4, f: 4, h:1, j: 4, s: 5 }
    // Tu código:
+
+var sort = string.split("").sort(function(a,b) {
+   return a.localeCompare(b)
+}).join("")
+
 var obj = {};
+
    for (var i = 0; i < string.length; i++){
        
- l = string.charAt(i);
-if (charCount.containsKey(l)) {
-contador = charCount.get(l);
-charCount.put(l, contador + 1);
+ 
+if (string[i] in obj) {
+obj[string[i]]++
 } else {
-   charCount.put(l, 1);
+   obj[string[i]] = 1
 }
    }
-  obj = string.sort();
-
+ 
   return obj;
 
 
@@ -48,15 +61,21 @@ function capToFront(string) {
    // Retornar el string.
    // [EJEMPLO]: soyHENRY ---> HENRYsoy
    // Tu código:
-   for(var i = 0; i< string.length; i++){
-      if (string[i] === string[i].isUpperCase()) {
-         string.unshift(string[i]);
-      }
-      
-   } return string;
+   
+   var resultado = "";
+var may = "";
+var min = "";
 
+for(var i = 0; i < string.length; i++) {
+   if (string[i] === string[i].toUpperCase()) {
+      may +=string[i];
+   }else {
+      min+=string[i]
+   }
+}
+resultado = may + min;
 
-
+   return resultado;
 
 }
 
@@ -66,15 +85,20 @@ function asAmirror(frase) {
    // [EJEMPLO]: "The Henry Challenge is close!"  ---> "ehT yrneH egnellahC si !esolc"
    // Tu código:
 
-   var ar = frase.split('');
+   //var ar = frase.split('');    
+    var ar = frase.split(" ");
    var nuevo = [];
 
-   for (var i = 0; i < ar.length; i++) {
-      if (ar[i] !== ' ') {
-      nuevo.push(ar[i]);
+    for (var i = 0; i < ar.length; i++) {
+       var espejo = ar[i].split("").reverse().join("");
+       nuevo.push(espejo)
+     // if (ar[i] !== ' ') {
+     // nuevo.push(ar[i]);
       }
-   }nuevo.reverse();
-   return nuevo;
+    // }nuevo.reverse();
+   //return nuevo.join(" ");
+
+   return nuevo.join(" ");
 }
 
 function capicua(numero) {
@@ -82,18 +106,22 @@ function capicua(numero) {
    // Caso contrario: "No es capicua".
    // Tu código:
 
-   var numString = numero.toString();
+ let num = numero.toString().split("").reverse().join("");
+ if (num == numero) return "Es capicua";
+ return "No es capicua";
+//////////////
+//   var numString = numero.toString();
    
-   var invertido = numString
-   .split('')
-   .reverse()
-   .join('');
+//   var invertido = numString
+//   .split('')
+//   .reverse()
+//   .join('');
 
-   if (numString === invertido){
-return "Es capicua";
-   }else {
-     return "No es capicua";
-   }
+//   if (numString === invertido){
+// return "Es capicua";
+//   }else {
+//     return "No es capicua";
+//   }
    
 
 
@@ -104,13 +132,15 @@ function deleteAbc(string) {
    // Retorna el string sin estas letras.
    // Tu código:
 
-  var arr = string.split('');
+ // var arr = string.split('');
   
-  var validacion = ["a", "b", "c"];
-  var vuelta = arr.filter(i => !validacion.includes(i));
+ // var validacion = ["a", "b", "c"];
+ // var vuelta = arr.filter(i => !validacion.includes(i));
 
-  return vuelta;
+ // return vuelta;
   
+  /////////
+   return string.replace(/[abc]/g, "")
 
 }
 
@@ -120,14 +150,24 @@ function sortArray(arrayOfStrings) {
    // de la longitud de cada string.
    // [EJEMPLO]: ["You", "are", "beautiful", "looking"]  ---> [“You", "are", "looking", "beautiful"]
    // Tu código:
-var nuevoArreglo = [];
 
-   for (var i = 0; i<arrayOfStrings.length; i++) {
-      if (arrayOfStrings[i][0].length < arrayOfStrings[i].length) {
-nuevoArreglo.unshift(arrayOfStrings[i][0]);
+/////////////
 
+let largoA = arrayOfStrings.length -1;
+let aux = arrayOfStrings;
+for (let i = 0; i< largoA; i++) {
+   for (let j = 0; j < largoA - i; j++) {
+      if (aux[j].length > aux[j + 1].length) {
+         let temp = aux[j];
+         aux[j] = aux[j + 1];
+         aux[j + 1] = temp;
       }
-   } return nuevoArreglo;
+   }
+}
+return aux;
+
+// return arrayOfStrings.sort((a, b)=> a.length -b.length)
+
 
 
 }
@@ -139,9 +179,23 @@ function buscoInterseccion(array1, array2) {
    // Si no tienen elementos en común, retornar un arreglo vacío.
    // [PISTA]: los arreglos no necesariamente tienen la misma longitud.
    // Tu código:
-var comun = array1.filter(n => array2.includes(n));
+// var comun = array1.filter(n => array2.includes(n));
 
-return comun;
+// return comun;
+
+/////////////////
+
+let numeros = [];
+
+for (let i = 0; i < array1.length; i++) {
+   for (let j = 0; j < array2.length; j++) {
+      if (array1[i] === array2[j]) {
+         numeros.push(array1[i]);
+      }
+   }
+}
+return numeros;
+
 }
 
 /*⚠️ NO MODIFIQUES NADA DEBAJO DE ESTO ⚠️*/

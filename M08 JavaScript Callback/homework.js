@@ -6,11 +6,15 @@ function mayuscula(nombre) {
    // [Ejemplo]: "mario" ----> "Mario".
    // Tu código:
 
+
+
    var correccion = nombre.split('').splice(1);
 
    return nombre[0].toUpperCase() + correccion.join("");
 
-   
+   ///////////
+
+// return nombre[0].toUpperCase() + nombre.slice(1);
 
    
 
@@ -46,6 +50,11 @@ resultado += arrayOfNumbers[i];
 
 cb(resultado);
 
+////////////
+
+// var resultado = arrayOfNumbers.reduce((acc, el) => acc + el, 0))
+//cb(suma);
+
 }
 
 function forEach(array, cb) {
@@ -58,6 +67,12 @@ function forEach(array, cb) {
       cb(elemento);
 
    }  )
+
+
+   //////////
+
+   //for (let i = 0; i<array.length; i++) {
+    //  cb(array[i]); }
 }
 
 function map(array, cb) {
@@ -69,6 +84,17 @@ var resultado = [];
 
 resultado = array.map((elemento) => cb(elemento))
    return resultado;
+
+//////////
+
+// var resultado = [];
+//for (let i = 0; i<array.length; i++) {
+//   resultado.push(cb(array[i]));  }
+//return resultado;
+
+
+
+
 }
 
 function filter(arrayOfStrings) {
@@ -85,6 +111,12 @@ for (var i = 0; i< arrayOfStrings.length; i++){
 
 
 }return nuevoArreglo;
+
+//////////////
+
+//metodo filter:
+
+//return arrayOfStrings.filter((el) => el[0] === 'a');
 
 
 
